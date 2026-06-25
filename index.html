@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Design | Инфографика для маркетплейсов</title>
+
+    <!-- Подключаем шрифты (Montserrat для заголовков, Open Sans для текста) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Open+Sans:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Подключаем стили для слайдера -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      /* ПРЕМИУМ ПАЛИТРА */
+      :root {
+        --bg-main: #0a0a0a; /* Глубокий черный */
+        --bg-secondary: #141414; /* Темно-серый для карточек */
+        --gold-light: #f9e5b7; /* Светлое золото (для текста) */
+        --gold-main: #c5a059; /* Основное золото */
+        --gold-dark: #8f7036; /* Темное золото (для теней/бордеров) */
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+      }
+
+      /* ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА И ПЛАВНАЯ ПРОКРУТКА */
+      html,
+      body {
+        max-width: 100vw;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        font-family: "Open Sans", sans-serif;
+        line-height: 1.6;
+        width: 100%;
+      }
+
+      h1,
+      h2,
+      h3,
+      .logo {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      /* ================= ШАПКА И МЕНЮ ================= */
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 30px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.4s ease;
+        background: transparent;
+      }
+
+      header.scrolled {
+        padding: 15px 50px;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-main);
+        text-decoration: none;
+        z-index: 2000; /* Чтобы лого было всегда поверх меню */
+      }
+      .logo span {
+        color: var(--gold-main);
+      }
+
+      /* Кнопка гамбургера (скрыта на ПК) */
+      .menu-toggle {
+        display: none;
+        cursor: pointer;
+        color: var(--gold-main);
+        font-size: 32px;
+        z-index: 2000; /* Чтобы кнопка была поверх меню */
+      }
+
+      nav {
+        display: flex;
+        gap: 30px;
+      }
+
+      nav a {
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 14px;
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      nav a:hover {
+        color: var(--gold-main);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 1px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--gold-main);
+        transition: width 0.3s;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .btn-gold {
+        padding: 12px 25px;
+        background: linear-gradient(
+          135deg,
+          var(--gold-main) 0%,
+          var(--gold-light) 50%,
+          var(--gold-dark) 100%
+        );
+        color: #000;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 1px;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+      }
+      .btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--gold-main);
+        border: 1px solid var(--gold-main);
+      }
+      .btn-outline:hover {
+        background: rgba(197, 160, 89, 0.1);
+        box-shadow: none;
+      }
+
+      /* ================= ГЛАВНЫЙ ЭКРАН ================= */
+      .hero {
+        min-height: 100vh;
+        padding-top: 120px; /* Отступ от шапки */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        position: relative;
+        width: 100%;
+        overflow: hidden; /* Защита фона от вылета */
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 40vw;
+        height: 40vw;
+        background: var(--gold-main);
+        filter: blur(150px);
+        opacity: 0.05;
+        z-index: 0;
+      }
+
+      .hero-content {
+        z-index: 1;
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+      .hero h1 span {
+        background: linear-gradient(
+          135deg,
+          var(--gold-light),
+          var(--gold-main)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 40px;
+        color: var(--text-muted);
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ================= СЕКЦИИ (Общие стили) ================= */
+      section {
+        padding: 100px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .section-title span {
+        color: var(--gold-main);
+      }
+
+      /* ================= ОБО МНЕ ================= */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+      .about-text p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        color: var(--text-muted);
+      }
+      .about-stats {
+        display: flex;
+        gap: 30px;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .stat-item h4 {
+        font-size: 2rem;
+        color: var(--gold-main);
+        margin-bottom: 5px;
+      }
+      .stat-item p {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-main);
+      }
+
+      /* ================= УСЛУГИ ================= */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+      .service-card {
+        background: var(--bg-secondary);
+        padding: 40px 30px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition:
+          transform 0.3s,
+          border-color 0.3s;
+        text-align: center;
+      }
+      .service-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--gold-main);
+      }
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      .service-card p {
+        color: var(--text-muted);
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+      }
+      .service-price {
+        font-size: 1.5rem;
+        color: var(--gold-main);
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+      }
+
+      /* ================= ПОРТФОЛИО (Слайдер) ================= */
+      .portfolio-wrap {
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .swiper {
+        width: 100%;
+        max-width: 1200px;
+        padding-top: 20px;
+        padding-bottom: 70px;
+      }
+      .swiper-slide {
+        width: 320px;
+        height: 450px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(197, 160, 89, 0.2);
+      }
+      .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .swiper-pagination-bullet {
+        background: var(--gold-main);
+      }
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: var(--gold-main);
+      }
+
+      /* ================= ПОДВАЛ / КОНТАКТЫ ================= */
+      footer {
+        text-align: center;
+        padding: 80px 20px 40px;
+        background: var(--bg-secondary);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+        width: 100%;
+      }
+      footer h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      footer p {
+        color: var(--text-muted);
+        margin-bottom: 40px;
+      }
+      .copyright {
+        margin-top: 60px;
+        font-size: 0.8rem;
+        color: #555;
+      }
+
+      /* ================= МОБИЛЬНАЯ ВЕРСИЯ (ДО 900px) ================= */
+      @media (max-width: 900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .about-stats {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        /* Жестко ограничиваем текст, чтобы не распирал экран */
+        .hero h1 {
+          font-size: 2.2rem;
+          margin-top: 20px;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+        .hero p {
+          font-size: 1rem;
+          padding: 0 10px;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          width: 100%;
+          max-width: 300px;
+          gap: 15px;
+          margin: 0 auto;
+        }
+        .btn-gold {
+          width: 100%;
+        }
+
+        /* ПОКАЗЫВАЕМ КНОПКУ МЕНЮ */
+        .menu-toggle {
+          display: block;
+        }
+
+        /* Настройки выпадающего мобильного меню */
+        nav {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(10, 10, 10, 0.98);
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 0;
+          gap: 20px;
+          display: none;
+          border-bottom: 1px solid var(--gold-main);
+          z-index: 1000;
+        }
+        nav.active {
+          display: flex;
+        }
+
+        header {
+          padding: 15px 20px;
+        }
+        header.scrolled {
+          padding: 10px 20px;
+        }
+        .header-btn {
+          display: none;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        /* Немного уменьшаем слайды для маленьких экранов */
+        .swiper-slide {
+          width: 280px;
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ШАПКА И МЕНЮ -->
+    <header id="header">
+      <a href="#" class="logo">VK<span>DESIGN</span></a>
+
+      <!-- Кнопка гамбургера для мобилок -->
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+      <nav id="nav-menu">
+        <a href="#about" onclick="toggleMenu()">Обо мне</a>
+        <a href="#services" onclick="toggleMenu()">Услуги</a>
+        <a href="#portfolio" onclick="toggleMenu()">Портфолио</a>
+        <a href="#contact" onclick="toggleMenu()">Контакты</a>
+      </nav>
+
+      <a href="#contact" class="btn-gold header-btn">Заказать</a>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Премиум дизайн <br />для <span>WB & Ozon</span></h1>
+        <p>
+          Вывожу карточки в ТОП с помощью сочной инфографики. Глубокий анализ
+          конкурентов, смысловая упаковка и стильный визуал.
+        </p>
+        <div class="hero-buttons">
+          <a href="#portfolio" class="btn-gold">Смотреть работы</a>
+          <a href="#contact" class="btn-gold btn-outline">Обсудить проект</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОБО МНЕ -->
+    <section id="about" class="about">
+      <h2 class="section-title">Обо <span>мне</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Привет! Я профессиональный дизайнер маркетплейсов. Моя цель — не
+            просто сделать «красивую картинку», а создать инструмент, который
+            будет <b>продавать ваш товар</b>.
+          </p>
+          <p>
+            Я анализирую боли вашей целевой аудитории, изучаю топы выдачи и
+            делаю дизайн, который пробивает баннерную слепоту покупателя.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <h4>500+</h4>
+              <p>Оформленных<br />артикулов</p>
+            </div>
+            <div class="stat-item">
+              <h4>2 года</h4>
+              <p>Опыта в<br />дизайне</p>
+            </div>
+          </div>
+        </div>
+        <!-- Сюда можешь вставить свое фото -->
+        <div
+          style="
+            background: var(--bg-secondary);
+            height: 400px;
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            overflow: hidden;
+          "
+        >
+          Место для твоего фото (img/photo.jpg)
+          <!-- Пример как вставить фото: <img src="img/моё-фото.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="Моё фото"> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- УСЛУГИ И ЦЕНЫ -->
+    <section id="services">
+      <h2 class="section-title">Мои <span>Услуги</span></h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Главная карточка</h3>
+          <p>
+            Анализ конкурентов, разработка концепции, выделение главных УТП,
+            кликабельный дизайн.
+          </p>
+          <div class="service-price">от 1 500 ₽</div>
+        </div>
+
+        <div class="service-card">
+          <h3>Внутренние слайды</h3>
+          <p>
+            Раскрытие преимуществ товара, инфографика характеристик, закрытие
+            возражений.
+          </p>
+          <div class="service-price">от 800 ₽ / шт.</div>
+        </div>
+
+        <div class="service-card">
+          <h3>Rich-контент</h3>
+          <p>
+            Создание длинного лендинга внутри карточки Ozon для максимальной
+            конверсии.
+          </p>
+          <div class="service-price">от 4 000 ₽</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section id="portfolio" style="padding-top: 50px">
+      <h2 class="section-title">Мои <span>Работы</span></h2>
+      <div class="portfolio-wrap">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <!-- Твои 10 webp изображений -->
+            <div class="swiper-slide">
+              <img src="img/1.webp" alt="Портфолио 1" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/2.webp" alt="Портфолио 2" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/3.webp" alt="Портфолио 3" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/4.webp" alt="Портфолио 4" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/5.webp" alt="Портфолио 5" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/6.webp" alt="Портфолио 6" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/7.webp" alt="Портфолио 7" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/8.webp" alt="Портфолио 8" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/9.webp" alt="Портфолио 9" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/10.webp" alt="Портфолио 10" />
+            </div>
+          </div>
+          <!-- Стрелки навигации слайдера -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <!-- Точки навигации -->
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <footer id="contact">
+      <h2>Готовы порвать конкурентов?</h2>
+      <p>
+        Напишите мне в Telegram, обсудим ваш товар и подберем лучшую визуальную
+        стратегию.
+      </p>
+
+      <!-- Замени t.me/ТВОЙ_НИК на свой настоящий ник -->
+      <a
+        href="https://t.me/ТВОЙ_НИК"
+        target="_blank"
+        class="btn-gold"
+        style="font-size: 16px; padding: 15px 40px; display: inline-block"
+        >Написать в Telegram</a
+      >
+
+      <div class="copyright">© 2024 VK DESIGN. Все права защищены.</div>
+    </footer>
+
+    <!-- Скрипты Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Скрипты для шапки и слайдера -->
+    <script>
+      // Настройка слайдера
+      var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        coverflowEffect: {
+          rotate: 15,
+          stretch: 0,
+          depth: 150,
+          modifier: 1,
+          slideShadows: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        autoplay: { delay: 3500, disableOnInteraction: false },
+      });
+
+      // Эффект темного стекла для шапки при прокрутке вниз
+      window.addEventListener("scroll", function () {
+        var header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Открытие/Закрытие мобильного меню по нажатию на Гамбургер
+      function toggleMenu() {
+        if (window.innerWidth <= 900) {
+          var menu = document.getElementById("nav-menu");
+          menu.classList.toggle("active");
+        }
+      }
+    </script>
+  </body>
+</html>

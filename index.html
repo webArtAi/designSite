@@ -13,7 +13,7 @@
         /* ================= ПЕРЕМЕННЫЕ (ТЕМНАЯ ТЕМА - ПО УМОЛЧАНИЮ) ================= */
         :root {
             --bg-main: #070707;          
-            --bg-alt: #0d0d0d; /* Для ритма секций */
+            --bg-alt: #0d0d0d; 
             --bg-glass: rgba(25, 25, 25, 0.6); 
             --accent-light: #F9E5B7;       
             --accent-main: #D4AF37;        
@@ -28,10 +28,10 @@
         /* ================= ПЕРЕМЕННЫЕ (СВЕТЛАЯ ТЕМА) ================= */
         body.light-theme {
             --bg-main: #ffffff;          
-            --bg-alt: #f4f6fb; /* Нежно-серый с синевой */
+            --bg-alt: #f4f6fb; 
             --bg-glass: rgba(255, 255, 255, 0.7); 
             --accent-light: #8c9eff;       
-            --accent-main: #3d5afe; /* Электрический синий */       
+            --accent-main: #3d5afe;        
             --accent-dark: #1c38d8;        
             --text-main: #14141b;
             --text-muted: #6e6e78;
@@ -51,7 +51,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         h1, h2, h3, h4, .logo { font-family: 'Montserrat', sans-serif; }
 
-        /* ================= ШАПКА И ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ================= */
+        /* ================= ШАПКА ================= */
         header { 
             position: fixed; width: 100%; top: 0; left: 0; z-index: 2000;
             padding: 25px 50px; display: flex; justify-content: space-between; align-items: center; 
@@ -69,7 +69,6 @@
         
         .header-controls { display: flex; align-items: center; gap: 20px; z-index: 2100; }
         
-        /* Кнопка смены темы */
         .theme-toggle {
             cursor: pointer; font-size: 24px; user-select: none;
             transition: transform 0.3s; background: var(--bg-glass);
@@ -96,7 +95,6 @@
         }
         .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(61, 90, 254, 0.3); }
         
-        /* Исправленная outline кнопка */
         .btn-outline { 
             background: transparent; color: var(--text-main); 
             border: 2px solid var(--accent-main); 
@@ -129,7 +127,7 @@
         /* ================= ОБЩИЕ СЕКЦИИ ================= */
         section { padding: 100px 20px; width: 100%; overflow: hidden; }
         .container { max-width: 1200px; margin: 0 auto; }
-        .section-alt { background-color: var(--bg-alt); } /* Класс для ритма секций */
+        .section-alt { background-color: var(--bg-alt); }
         
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 2px; }
         .section-title span { color: var(--accent-main); }
@@ -148,7 +146,6 @@
         .portfolio-swiper .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
         .swiper-pagination-bullet { background: var(--accent-main); }
         
-        /* Исправленные стрелки навигации */
         .swiper-button-next, .swiper-button-prev { 
             color: var(--accent-main); background: var(--bg-glass); 
             width: 50px; height: 50px; border-radius: 50%; 
@@ -189,15 +186,31 @@
         .step-card h4 { font-size: 1.2rem; color: var(--accent-main); margin-bottom: 10px; position: relative; z-index: 2; }
         .step-card p { font-size: 0.9rem; color: var(--text-muted); position: relative; z-index: 2; }
 
-        /* ================= ОТЗЫВЫ (Исправлены) ================= */
-        .reviews-swiper { width: 100%; max-width: 1000px; padding-bottom: 50px; }
-        /* Теперь отзывы завернуты в карточку */
+        /* ================= ОТЗЫВЫ (ПОЛНОСТЬЮ ИСПРАВЛЕНЫ) ================= */
+        .reviews-swiper { width: 100%; max-width: 1060px; padding-bottom: 50px; }
+        
+        /* Добавлено матовое стекло и отступы, как у остальных карточек */
         .review-card { 
-            width: 320px; padding: 20px; border-radius: 15px; 
-            background: var(--bg-glass); border: 1px solid var(--border-subtle);
-            box-shadow: 0 10px 25px var(--shadow-color);
+            width: 320px; 
+            padding: 20px; 
+            border-radius: 15px; 
+            background: var(--bg-glass); 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform 0.3s, border-color 0.3s;
         }
-        .review-card img { width: 100%; display: block; border-radius: 8px; }
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-main);
+        }
+        .review-card img { 
+            width: 100%; 
+            display: block; 
+            border-radius: 8px; 
+            border: 1px solid rgba(255,255,255,0.05); /* Легкая рамка вокруг самого скрина */
+        }
 
         /* ================= ПОДВАЛ ================= */
         footer { 
@@ -245,6 +258,9 @@
             
             .ba-images { flex-direction: column; gap: 20px; }
             .ba-card img { width: 100%; height: auto; }
+            
+            /* На мобилке карточка отзыва чуть уже */
+            .review-card { width: 280px; padding: 15px; }
         }
     </style>
 </head>
@@ -308,7 +324,7 @@
         </div>
     </section>
 
-    <!-- ДО / ПОСЛЕ (Альтернативный фон) -->
+    <!-- ДО / ПОСЛЕ -->
     <section id="before-after" class="section-alt">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Результат <span>До / После</span></h2>
@@ -370,7 +386,7 @@
         </div>
     </section>
 
-    <!-- ЭТАПЫ РАБОТЫ (Альтернативный фон) -->
+    <!-- ЭТАПЫ РАБОТЫ -->
     <section id="process" class="section-alt">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Как мы <span>Работаем</span></h2>
@@ -434,13 +450,13 @@
         </div>
     </section>
 
-    <!-- ОТЗЫВЫ КЛИЕНТОВ (Исправлено: Карточки + отключение при пустом) -->
+    <!-- ОТЗЫВЫ КЛИЕНТОВ (Исправлено) -->
     <section id="reviews" class="section-alt">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Отзывы <span>клиентов</span></h2>
             <div class="reviews-swiper swiper" data-aos="zoom-in">
                 <div class="swiper-wrapper">
-                    <!-- Теперь каждый отзыв лежит в красивой карточке -->
+                    <!-- Теперь каждый отзыв обернут в КАРТОЧКУ (class="review-card") -->
                     <div class="swiper-slide review-card"><img src="img/otzyv1.webp" alt="Отзыв 1"></div>
                     <div class="swiper-slide review-card"><img src="img/otzyv2.webp" alt="Отзыв 2"></div>
                     <div class="swiper-slide review-card"><img src="img/otzyv3.webp" alt="Отзыв 3"></div>
@@ -468,11 +484,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // --- 1. Анимации ---
+        // Анимации
         AOS.init({ duration: 800, once: true, offset: 50 });
 
-        // --- 2. Слайдер ПОРТФОЛИО ---
-        // Уменьшили угол поворота 3D с 10 до 5, чтобы выглядело мягче и дороже
+        // Слайдер ПОРТФОЛИО
         var portfolioSwiper = new Swiper(".portfolio-swiper", {
             effect: "coverflow",
             grabCursor: true,
@@ -485,26 +500,31 @@
             autoplay: { delay: 3500, disableOnInteraction: false }
         });
 
-        // --- 3. Слайдер ОТЗЫВОВ ---
-        // Добавлен watchOverflow: true - если отзывы влезают на экран ПК, слайдер "засыпает" (точки пропадают)
+        // Слайдер ОТЗЫВОВ (ИСПРАВЛЕН БАГ С ПУСТЫМ МЕСТОМ НА ПК)
         var reviewsSwiper = new Swiper(".reviews-swiper", {
             slidesPerView: "auto",
-            spaceBetween: 20,
+            spaceBetween: 30,
             grabCursor: true,
-            centeredSlides: true,
             loop: false, 
-            watchOverflow: true, 
-            pagination: { el: ".reviews-swiper .swiper-pagination", clickable: true }
+            watchOverflow: true, // Если отзывов мало (на ПК), слайдер замирает
+            centerInsufficientSlides: true, // ВАЖНО: Ровно центрирует отзывы на экране ПК
+            pagination: { el: ".reviews-swiper .swiper-pagination", clickable: true },
+            breakpoints: {
+                // На телефоне включаем классическое центрирование текущего слайда
+                0: { centeredSlides: true },
+                // На ПК отключаем, чтобы группа карточек просто стояла по центру ровно
+                901: { centeredSlides: false }
+            }
         });
 
-        // --- 4. Шапка (прозрачность) ---
+        // Шапка (прозрачность)
         window.addEventListener("scroll", function() {
             var header = document.getElementById("header");
             if (window.scrollY > 50) { header.classList.add("scrolled"); } 
             else { header.classList.remove("scrolled"); }
         });
 
-        // --- 5. Мобильное меню ---
+        // Мобильное меню
         function toggleMenu() {
             if(window.innerWidth <= 900) {
                 var menu = document.getElementById("nav-menu");
@@ -522,15 +542,15 @@
             }
         }
 
-        // --- 6. ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (МАГИЯ ЗДЕСЬ) ---
+        // ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
         function toggleTheme() {
             document.body.classList.toggle('light-theme');
             const icon = document.getElementById('themeIcon');
             
             if(document.body.classList.contains('light-theme')) {
-                icon.innerHTML = '🌙'; // Если светлая тема - показываем луну
+                icon.innerHTML = '🌙'; 
             } else {
-                icon.innerHTML = '☀️'; // Если темная тема - показываем солнце
+                icon.innerHTML = '☀️'; 
             }
         }
     </script>

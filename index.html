@@ -46,6 +46,20 @@
         --shadow-color: rgba(61, 90, 254, 0.08);
       }
 
+      /* ================= АВТОМАТИЧЕСКАЯ СМЕНА КАРТИНОК ================= */
+      /* По умолчанию светлые картинки спрятаны */
+      .img-light {
+        display: none !important;
+      }
+
+      /* Когда включается светлая тема: прячем темные, показываем светлые */
+      body.light-theme .img-dark {
+        display: none !important;
+      }
+      body.light-theme .img-light {
+        display: block !important;
+      }
+
       /* БАЗА */
       html,
       body {
@@ -391,39 +405,34 @@
         grid-template-columns: 1fr 1fr;
         gap: 40px;
       }
-
       .ba-slider-container {
         position: relative;
         width: 100%;
-        aspect-ratio: 3 / 4; /* Задаем строгие пропорции карточки (как на ВБ) */
+        aspect-ratio: 3 / 4;
         border-radius: 10px;
         overflow: hidden;
         margin-top: 20px;
         border: 1px solid var(--border-subtle);
-        --position: 50%; /* Стартовая позиция ползунка */
+        --position: 50%;
       }
-
       .ba-slider-img {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none; /* Чтобы не мешало кликать на ползунок */
+        pointer-events: none;
       }
       .ba-slider-img img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-
-      /* "До" находится поверх "После" и обрезается с помощью clip-path */
       .img-after {
         z-index: 1;
       }
       .img-before {
         z-index: 2;
-        /* Гениальное решение: обрезаем правую часть картинки по переменной --position */
         clip-path: polygon(
           0 0,
           var(--position) 0,
@@ -431,8 +440,6 @@
           0 100%
         );
       }
-
-      /* Белая линия ползунка */
       .slider-line {
         position: absolute;
         top: 0;
@@ -445,8 +452,6 @@
         pointer-events: none;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
-
-      /* Круглая кнопка ползунка с двумя стрелочками */
       .slider-button {
         position: absolute;
         top: 50%;
@@ -466,23 +471,19 @@
         height: 24px;
         fill: var(--btn-text);
       }
-
-      /* Сам невидимый input type="range" поверх всего (он и ловит касания/мышь) */
       .ba-range {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0; /* Делаем его полностью прозрачным */
-        cursor: ew-resize; /* Иконка курсора влево-вправо */
+        opacity: 0;
+        cursor: ew-resize;
         z-index: 10;
         margin: 0;
         padding: 0;
-        -webkit-appearance: none; /* Убираем стандартный вид ползунка */
+        -webkit-appearance: none;
       }
-
-      /* Фирменные бирки */
       .ba-label {
         position: absolute;
         top: 15px;
@@ -805,12 +806,15 @@
     <!-- ШАПКА -->
     <header id="header">
       <a href="#" class="logo">DESIGN<span>ER</span></a>
+
       <div class="header-controls">
+        <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ -->
         <div class="theme-toggle" onclick="toggleTheme()" id="themeIcon">
           ☀️
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
       </div>
+
       <nav id="nav-menu">
         <a href="#portfolio" onclick="toggleMenu()">Работы</a>
         <a href="#services" onclick="toggleMenu()">Услуги</a>
@@ -879,7 +883,7 @@
       </div>
     </section>
 
-    <!-- ИНТЕРАКТИВНОЕ ДО / ПОСЛЕ (МАГИЯ ЗДЕСЬ) -->
+    <!-- ИНТЕРАКТИВНОЕ ДО / ПОСЛЕ -->
     <section id="before-after" class="section-alt">
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">
@@ -902,7 +906,6 @@
             </p>
 
             <div class="ba-slider-container">
-              <!-- Картинка ПОСЛЕ (снизу) -->
               <div class="ba-slider-img img-after">
                 <img src="img/after1.webp" alt="После" />
                 <div
@@ -912,14 +915,10 @@
                   ПОСЛЕ
                 </div>
               </div>
-
-              <!-- Картинка ДО (сверху, обрезается) -->
               <div class="ba-slider-img img-before">
                 <img src="img/before1.webp" alt="До" />
                 <div class="ba-label label-before">ДО</div>
               </div>
-
-              <!-- Ползунок -->
               <input
                 type="range"
                 min="0"
@@ -1135,7 +1134,9 @@
           </div>
 
           <div class="about-photo" data-aos="fade-left">
-            <img src="img/photo.webp" alt="Дизайнер" />
+            <!-- СМЕНА АВАТАРА ЗДЕСЬ -->
+            <img src="img/photo.webp" class="img-dark" alt="Дизайнер" />
+            <img src="img/photo-light.webp" class="img-light" alt="Дизайнер" />
           </div>
         </div>
       </div>
@@ -1149,14 +1150,32 @@
         </h2>
         <div class="reviews-swiper swiper" data-aos="zoom-in">
           <div class="swiper-wrapper">
+            <!-- СМЕНА ОТЗЫВОВ ЗДЕСЬ -->
             <div class="swiper-slide review-card">
-              <img src="img/otzyv1.webp" alt="Отзыв 1" />
+              <img src="img/otzyv1.webp" class="img-dark" alt="Отзыв 1" />
+              <img
+                src="img/otzyv1-light.webp"
+                class="img-light"
+                alt="Отзыв 1"
+              />
             </div>
+
             <div class="swiper-slide review-card">
-              <img src="img/otzyv2.webp" alt="Отзыв 2" />
+              <img src="img/otzyv2.webp" class="img-dark" alt="Отзыв 2" />
+              <img
+                src="img/otzyv2-light.webp"
+                class="img-light"
+                alt="Отзыв 2"
+              />
             </div>
+
             <div class="swiper-slide review-card">
-              <img src="img/otzyv3.webp" alt="Отзыв 3" />
+              <img src="img/otzyv3.webp" class="img-dark" alt="Отзыв 3" />
+              <img
+                src="img/otzyv3-light.webp"
+                class="img-light"
+                alt="Отзыв 3"
+              />
             </div>
           </div>
           <div class="swiper-pagination"></div>

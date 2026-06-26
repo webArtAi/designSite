@@ -47,12 +47,9 @@
       }
 
       /* ================= АВТОМАТИЧЕСКАЯ СМЕНА КАРТИНОК ================= */
-      /* По умолчанию светлые картинки спрятаны */
       .img-light {
         display: none !important;
       }
-
-      /* Когда включается светлая тема: прячем темные, показываем светлые */
       body.light-theme .img-dark {
         display: none !important;
       }
@@ -399,7 +396,7 @@
         font-weight: 800;
       }
 
-      /* ================= ИНТЕРАКТИВНЫЙ ПОЛЗУНОК ДО / ПОСЛЕ ================= */
+      /* ================= ИНТЕРАКТИВНОЕ ДО / ПОСЛЕ ================= */
       .ba-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -626,7 +623,7 @@
         z-index: 2;
       }
 
-      /* ================= ОТЗЫВЫ ================= */
+      /* ================= ОТЗЫВЫ (Исправлена высота картинок) ================= */
       .reviews-swiper {
         width: 100%;
         max-width: 1060px;
@@ -650,11 +647,16 @@
         transform: translateY(-5px);
         border-color: var(--accent-main);
       }
+
+      /* МАГИЯ ЗДЕСЬ: Фиксируем высоту всех скриншотов, чтобы карточки не плясали */
       .review-card img {
         width: 100%;
+        height: 500px; /* Идеальная высота для скриншота */
+        object-fit: cover; /* Заполняет рамку, лишнее снизу обрезает */
+        object-position: top; /* Всегда прижимаем к верху (видно имя клиента) */
         display: block;
         border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-subtle);
       }
 
       /* ================= ПОДВАЛ ================= */
@@ -731,6 +733,7 @@
           overflow-wrap: break-word;
           word-wrap: break-word;
         }
+
         .menu-toggle {
           display: block;
         }
@@ -758,6 +761,7 @@
           font-size: 22px;
           font-weight: 600;
         }
+
         header {
           padding: 15px 20px;
         }
@@ -767,6 +771,7 @@
         .header-btn {
           display: none;
         }
+
         .portfolio-swiper .swiper-slide {
           width: 280px;
           height: 400px;
@@ -781,9 +786,23 @@
           gap: 20px;
           margin-bottom: 30px;
         }
+
+        .ba-images {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .ba-card img {
+          width: 100%;
+          height: auto;
+        }
+
+        /* На мобилке отзывы чуть компактнее */
         .review-card {
           width: 280px;
           padding: 15px;
+        }
+        .review-card img {
+          height: 420px;
         }
       }
     </style>
@@ -806,15 +825,12 @@
     <!-- ШАПКА -->
     <header id="header">
       <a href="#" class="logo">DESIGN<span>ER</span></a>
-
       <div class="header-controls">
-        <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ -->
         <div class="theme-toggle" onclick="toggleTheme()" id="themeIcon">
           ☀️
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
       </div>
-
       <nav id="nav-menu">
         <a href="#portfolio" onclick="toggleMenu()">Работы</a>
         <a href="#services" onclick="toggleMenu()">Услуги</a>
@@ -890,7 +906,6 @@
           Результат <span>До / После</span>
         </h2>
         <div class="ba-grid">
-          <!-- Пример 1 -->
           <div class="ba-item glass-card" data-aos="fade-right">
             <h3 style="color: var(--text-main); font-size: 1.2rem">
               Редизайн карточки<br />"Товар 1"
@@ -904,7 +919,6 @@
             >
               CTR вырос с 2% до 8%
             </p>
-
             <div class="ba-slider-container">
               <div class="ba-slider-img img-after">
                 <img src="img/after1.webp" alt="После" />
@@ -944,7 +958,6 @@
             </div>
           </div>
 
-          <!-- Пример 2 -->
           <div
             class="ba-item glass-card"
             data-aos="fade-left"
@@ -962,7 +975,6 @@
             >
               Рост продаж на 40% за неделю
             </p>
-
             <div class="ba-slider-container">
               <div class="ba-slider-img img-after">
                 <img src="img/after2.webp" alt="После" />
@@ -1134,7 +1146,6 @@
           </div>
 
           <div class="about-photo" data-aos="fade-left">
-            <!-- СМЕНА АВАТАРА ЗДЕСЬ -->
             <img src="img/photo.webp" class="img-dark" alt="Дизайнер" />
             <img src="img/photo-light.webp" class="img-light" alt="Дизайнер" />
           </div>
@@ -1150,7 +1161,6 @@
         </h2>
         <div class="reviews-swiper swiper" data-aos="zoom-in">
           <div class="swiper-wrapper">
-            <!-- СМЕНА ОТЗЫВОВ ЗДЕСЬ -->
             <div class="swiper-slide review-card">
               <img src="img/otzyv1.webp" class="img-dark" alt="Отзыв 1" />
               <img
